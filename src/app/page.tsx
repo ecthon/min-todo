@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Separator } from "@/components/ui/separator";
-import { EllipsisVertical, Pencil, Trash2 } from "lucide-react";
+import { EllipsisVertical, Pencil, Plus, Trash2 } from "lucide-react";
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form";
@@ -28,7 +28,6 @@ const formSchema = z.object({
   taskTitle: z.string().min(2)
 })
 
-
 export default function Home() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,9 +39,10 @@ export default function Home() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
   }
+
   return (
     <div className="flex flex-col w-[604px] h-screen mx-auto mt-10">
-      <header className="flex w-[604px] gap-5 items-center">
+      {/* <header className="flex w-[604px] gap-5 items-center">
         <div className="flex w-[80px] h-[80px] items-center justify-center bg-zinc-800">
           <span className="font-bold text-4xl text-white">11</span>
         </div>
@@ -50,28 +50,27 @@ export default function Home() {
           <p className="font-bold text-4xl text-zinc-800">MAR</p>
           <p className="">Segunda-feira, 2024</p>
         </div>
-      </header>
+      </header> */}
 
       <Separator className="my-10 w-[604px]"/>
 
       <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-cente">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-cente gap-2">
         <FormField
           control={form.control}
           name="taskTitle"
           render={({ field }) => (
             <FormItem className="w-full">
               <FormControl>
-                <Input placeholder="Adicionar nova tarefa" {...field} />
+                <Input placeholder="Adicionar nova tarefa" {...field} className="focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-zinc-400" />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit"><Plus /></Button>
       </form>
-    </Form>
-
+      </Form>
       <div className="flex items-center justify-between w-[604px] py-2">
         <div className="flex items-center gap-3">
           <Checkbox id="terms" />
